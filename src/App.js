@@ -243,8 +243,9 @@ function App() {
                     placeholder="Broadcast to the void..."
                     onChange={handleTyping}
                     onKeyPress={(event) => event.key === "Enter" && sendMessage()}
-                  />
-                  <button onClick={sendMessage}>&#10148;</button>
+                    />
+                  {/* The aria-label has been added to the button below for SEO/Accessibility */}
+                  <button onClick={sendMessage} aria-label="Send message">&#10148;</button>
                 </div>
               </div>
             </div>
