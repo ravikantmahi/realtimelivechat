@@ -246,20 +246,17 @@ function App() {
               Designed & Developed by <strong className="gradient-text">Ravi Kant</strong>
             </p>
             <p className="footer-skills">
-              MCA Graduate | MERN Stack | Graphic Designer
+              MERN Stack | Graphic Designer
               <br/>
               AI/ML | Big Data & Data Science | Python
             </p>
           </div>
           <div className="social-links">
-            <a href="mailto:contact@yourdomain.com" className="email-link">✉️ Contact Me</a>
+            <a href="mailto:ravikantmahi011@gmail.com" className="email-link">✉️ Contact Me</a>
             <div className="social-badges">
               <a href="https://www.linkedin.com/in/ravikantmahi/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
               <a href="https://github.com/Ravikantmahi" target="_blank" rel="noopener noreferrer">GitHub</a>
               <a href="https://www.instagram.com/ravikant.mahii" target="_blank" rel="noopener noreferrer">Instagram</a>
-              <a href="https://reddit.com" target="_blank" rel="noopener noreferrer">Reddit</a>
-              <a href="https://kaggle.com" target="_blank" rel="noopener noreferrer">Kaggle</a>
-              <a href="https://huggingface.co" target="_blank" rel="noopener noreferrer">Hugging Face</a>
             </div>
           </div>
         </div>
