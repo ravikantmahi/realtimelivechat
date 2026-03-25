@@ -104,45 +104,51 @@ function App() {
     }
   }, [messageList, typingStatus]);
 
+  // Helper to get initials
+  const getInitial = (name) => name ? name.charAt(0).toUpperCase() : "?";
+
   return (
     <div className="App">
       {!showChat ? (
         <div className="join-chat-container">
           <div className="hero-text">
-            <h2>Welcome to RealTime Live Chat</h2>
-            <p>Connect instantly and anonymously. Experience seamless, lightning-fast communication with our modern interface.</p>
+            <h2>Enter the Void</h2>
+            <p>Connect instantly and anonymously. Experience seamless, lightning-fast communication in our secure real-time environment.</p>
           </div>
           <div className="join-box">
-            <h3>Join the Conversation</h3>
+            <h3>Join Conversation</h3>
             <input
               type="text"
               placeholder="Enter your alias..."
               onChange={(event) => setUsername(event.target.value)}
               onKeyPress={(event) => event.key === "Enter" && joinChat()}
             />
-            <button onClick={joinChat}>Enter Chat Room</button>
+            <button onClick={joinChat}>Enter Room <span>&#10148;</span></button>
           </div>
         </div>
       ) : (
         <div className="app-container">
           <div className="glass-panel main-interface">
+            
             {/* Sidebar for About & Users */}
             <div className="sidebar">
               <div className="about-section">
-                <h3>About This App</h3>
+                <h3>Nexus Chat</h3>
                 <p>
-                  🌐 <strong>realtimelivechat.vercel.app</strong> is a secure, fully anonymous real-time messaging platform. 
-                  Messages disappear when you leave, ensuring your conversations remain private.
+                  Secure, fully anonymous real-time messaging. 
+                  Messages disappear when you leave, ensuring absolute privacy.
                 </p>
                 <ul className="feature-list">
-                  <li>⚡ Instant Real-Time Delivery</li>
-                  <li>🕵️‍♂️ 100% Anonymous</li>
-                  <li>💬 Live Typing Indicators</li>
+                  <li><span className="icon">⚡</span> Instant Delivery</li>
+                  <li><span className="icon">🕵️‍♂️</span> 100% Anonymous</li>
+                  <li><span className="icon">💬</span> Live Typing</li>
                 </ul>
               </div>
               
               <div className="users-section">
-                <h3 title="Click a name to tag them!">🟢 Online Now ({activeUsers.length})</h3>
+                <h3 title="Click a name to tag them!">
+                  Network ({activeUsers.length})
+                </h3>
                 <ul className="user-list">
                   {activeUsers.map((user, index) => (
                     <li 
@@ -150,18 +156,23 @@ function App() {
                       className={user === username ? "highlight-me" : "interactive-user"}
                       onClick={() => handleUserClick(user)}
                     >
-                      {user} {user === username && "(You)"}
+                      <div className="user-info">
+                        <div className="avatar">{getInitial(user)}</div>
+                        <span className="username-text">{user} {user === username && "(You)"}</span>
+                      </div>
+                      <div className="status-dot"></div>
                     </li>
                   ))}
                 </ul>
-                <p className="sidebar-hint">*Click a user to tag them</p>
+                <p className="sidebar-hint">*Click a user to tag</p>
               </div>
             </div>
 
             {/* Chat Window */}
             <div className="chat-window">
               <div className="chat-header">
-                <p>Global Chat Room</p>
+                <div className="header-status"></div>
+                <p>Global Frequency</p>
               </div>
               
               <div className="chat-body" ref={chatBodyRef}>
@@ -177,12 +188,17 @@ function App() {
                   const isMe = messageContent.author === username;
                   return (
                     <div className="message-container" id={isMe ? "you" : "other"} key={index}>
-                      <div className="message-content">
-                        <p>{messageContent.text}</p>
-                      </div>
-                      <div className="message-meta">
-                        <p id="author">{isMe ? "You" : messageContent.author}</p>
-                        <p id="time">{messageContent.time}</p>
+                      {!isMe && <div className="message-avatar">{getInitial(messageContent.author)}</div>}
+                      <div className="message-bubble-wrapper">
+                        <div className="message-meta-top">
+                          {!isMe && <span id="author">{messageContent.author}</span>}
+                        </div>
+                        <div className="message-content">
+                          <p>{messageContent.text}</p>
+                        </div>
+                        <div className="message-meta-bottom">
+                          <span id="time">{messageContent.time}</span>
+                        </div>
                       </div>
                     </div>
                   );
@@ -227,25 +243,24 @@ function App() {
         <div className="footer-content">
           <div className="footer-info">
             <p className="footer-credits">
-              Designed & Developed by <strong>Ravi Kant</strong>
+              Designed & Developed by <strong className="gradient-text">Ravi Kant</strong>
             </p>
             <p className="footer-skills">
-              MCA Graduate | Web Developer | Graphic Designer
+              MCA Graduate | MERN Stack | Graphic Designer
               <br/>
-              Python | AI/ML | Big Data & Data Science
-            </p>
-            <p className="footer-email">
-               <a href="mailto:contact@yourdomain.com">✉️ Contact Me</a>
+              AI/ML | Big Data & Data Science | Python
             </p>
           </div>
           <div className="social-links">
-            <a href="https://www.linkedin.com/in/ravikantmahi/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-            <a href="https://github.com/Ravikantmahi" target="_blank" rel="noopener noreferrer">GitHub</a>
-            <a href="https://www.instagram.com/ravikant.mahii" target="_blank" rel="noopener noreferrer">Instagram</a>
-            <a href="https://reddit.com" target="_blank" rel="noopener noreferrer">Reddit</a>
-            <a href="https://kaggle.com" target="_blank" rel="noopener noreferrer">Kaggle</a>
-            <a href="https://huggingface.co" target="_blank" rel="noopener noreferrer">Hugging Face</a>
-            <a href="https://about.me" target="_blank" rel="noopener noreferrer">About.me</a>
+            <a href="mailto:contact@yourdomain.com" className="email-link">✉️ Contact Me</a>
+            <div className="social-badges">
+              <a href="https://www.linkedin.com/in/ravikantmahi/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+              <a href="https://github.com/Ravikantmahi" target="_blank" rel="noopener noreferrer">GitHub</a>
+              <a href="https://www.instagram.com/ravikant.mahii" target="_blank" rel="noopener noreferrer">Instagram</a>
+              <a href="https://reddit.com" target="_blank" rel="noopener noreferrer">Reddit</a>
+              <a href="https://kaggle.com" target="_blank" rel="noopener noreferrer">Kaggle</a>
+              <a href="https://huggingface.co" target="_blank" rel="noopener noreferrer">Hugging Face</a>
+            </div>
           </div>
         </div>
       </footer>
