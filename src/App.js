@@ -19,6 +19,11 @@ function App() {
 
   const emojis = ["😂", "❤️", "👍", "🔥", "✨", "👀"];
 
+  // Set document title for authenticity
+  useEffect(() => {
+    document.title = "Void Discussion | Anonymous Real-Time Chat";
+  }, []);
+
   const joinChat = () => {
     if (username !== "") {
       socket.emit("user_joined", username); 
@@ -104,7 +109,6 @@ function App() {
     }
   }, [messageList, typingStatus]);
 
-  // Helper to get initials
   const getInitial = (name) => name ? name.charAt(0).toUpperCase() : "?";
 
   return (
@@ -112,18 +116,25 @@ function App() {
       {!showChat ? (
         <div className="join-chat-container">
           <div className="hero-text">
-            <h2>Enter the Void</h2>
-            <p>Connect instantly and anonymously. Experience seamless, lightning-fast communication in our secure real-time environment.</p>
+            <div className="version-badge">v2.0.4 Secure Build</div>
+            <h2>Void Discussion</h2>
+            <p>Where ideas echo, securely and anonymously. Experience seamless, lightning-fast communication in our volatile, memory-only environment.</p>
+            
+            <div className="trust-badges">
+              <span>🛡️ No Chat Logs</span>
+              <span>⏱️ Ephemeral Rooms</span>
+              <span>🔒 End-to-End Speed</span>
+            </div>
           </div>
           <div className="join-box">
-            <h3>Join Conversation</h3>
+            <h3>Join the Void</h3>
             <input
               type="text"
               placeholder="Enter your alias..."
               onChange={(event) => setUsername(event.target.value)}
               onKeyPress={(event) => event.key === "Enter" && joinChat()}
             />
-            <button onClick={joinChat}>Enter Room <span>&#10148;</span></button>
+            <button onClick={joinChat}>Initialize Connection <span>&#10148;</span></button>
           </div>
         </div>
       ) : (
@@ -133,21 +144,24 @@ function App() {
             {/* Sidebar for About & Users */}
             <div className="sidebar">
               <div className="about-section">
-                <h3>Nexus Chat</h3>
+                <h3>Void Discussion</h3>
                 <p>
-                  Secure, fully anonymous real-time messaging. 
-                  Messages disappear when you leave, ensuring absolute privacy.
+                  A decentralized-style, ephemeral communication protocol. Messages are held only in active memory and are destroyed when the room empties.
                 </p>
-                <ul className="feature-list">
-                  <li><span className="icon">⚡</span> Instant Delivery</li>
-                  <li><span className="icon">🕵️‍♂️</span> 100% Anonymous</li>
-                  <li><span className="icon">💬</span> Live Typing</li>
-                </ul>
+                
+                <div className="rules-box">
+                  <h4>Rules of the Void</h4>
+                  <ul>
+                    <li>Respect the anonymity of others.</li>
+                    <li>No hate speech, spam, or illicit content.</li>
+                    <li>Do not share personally identifiable info.</li>
+                  </ul>
+                </div>
               </div>
               
               <div className="users-section">
                 <h3 title="Click a name to tag them!">
-                  Network ({activeUsers.length})
+                  Active Nodes ({activeUsers.length})
                 </h3>
                 <ul className="user-list">
                   {activeUsers.map((user, index) => (
@@ -172,7 +186,7 @@ function App() {
             <div className="chat-window">
               <div className="chat-header">
                 <div className="header-status"></div>
-                <p>Global Frequency</p>
+                <p>Global Frequency: Void-01</p>
               </div>
               
               <div className="chat-body" ref={chatBodyRef}>
@@ -226,7 +240,7 @@ function App() {
                   <input
                     type="text"
                     value={currentMessage}
-                    placeholder="Type a message..."
+                    placeholder="Broadcast to the void..."
                     onChange={handleTyping}
                     onKeyPress={(event) => event.key === "Enter" && sendMessage()}
                   />
@@ -241,22 +255,38 @@ function App() {
       {/* Modern Portfolio Footer */}
       <footer className="modern-footer">
         <div className="footer-content">
-          <div className="footer-info">
-            <p className="footer-credits">
-              Designed & Developed by <strong className="gradient-text">Ravi Kant</strong>
-            </p>
-            <p className="footer-skills">
-              MERN Stack | Graphic Designer
-              <br/>
-              AI/ML | Big Data & Data Science | Python
-            </p>
+          <div className="footer-main">
+            <div className="footer-info">
+              <p className="footer-credits">
+                System Architect: <strong className="gradient-text">Ravi Kant</strong>
+              </p>
+              <p className="footer-skills">
+                MCA Graduate | Web Developer | Graphics Designer
+                <br/>
+                Python (Core) | AI/ML | Big Data & Data Science
+              </p>
+            </div>
+            <div className="social-links">
+              <a href="mailto:contact@yourdomain.com" className="email-link">✉️ Establish Contact</a>
+              <div className="social-badges">
+                <a href="https://www.linkedin.com/in/ravikantmahi/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+                <a href="https://github.com/Ravikantmahi" target="_blank" rel="noopener noreferrer">GitHub</a>
+                <a href="https://www.instagram.com/ravikant.mahii" target="_blank" rel="noopener noreferrer">Instagram</a>
+                <a href="https://reddit.com" target="_blank" rel="noopener noreferrer">Reddit</a>
+                <a href="https://kaggle.com" target="_blank" rel="noopener noreferrer">Kaggle</a>
+                <a href="https://huggingface.co" target="_blank" rel="noopener noreferrer">Hugging Face</a>
+                <a href="https://about.me" target="_blank" rel="noopener noreferrer">About.me</a>
+              </div>
+            </div>
           </div>
-          <div className="social-links">
-            <a href="mailto:ravikantmahi011@gmail.com" className="email-link">✉️ Contact Me</a>
-            <div className="social-badges">
-              <a href="https://www.linkedin.com/in/ravikantmahi/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-              <a href="https://github.com/Ravikantmahi" target="_blank" rel="noopener noreferrer">GitHub</a>
-              <a href="https://www.instagram.com/ravikant.mahii" target="_blank" rel="noopener noreferrer">Instagram</a>
+          
+          {/* Legal / Copyright Bar */}
+          <div className="footer-bottom">
+            <p>&copy; 2026 Void Discussion. All rights reserved.</p>
+            <div className="footer-links-legal">
+              <a href="#privacy" onClick={(e) => e.preventDefault()}>Privacy Policy</a>
+              <a href="#terms" onClick={(e) => e.preventDefault()}>Terms of Service</a>
+              <a href="#guidelines" onClick={(e) => e.preventDefault()}>Guidelines</a>
             </div>
           </div>
         </div>
