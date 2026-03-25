@@ -272,11 +272,7 @@ function App() {
                 <a href="https://www.linkedin.com/in/ravikantmahi/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
                 <a href="https://github.com/Ravikantmahi" target="_blank" rel="noopener noreferrer">GitHub</a>
                 <a href="https://www.instagram.com/ravikant.mahii" target="_blank" rel="noopener noreferrer">Instagram</a>
-                <a href="https://reddit.com" target="_blank" rel="noopener noreferrer">Reddit</a>
-                <a href="https://kaggle.com" target="_blank" rel="noopener noreferrer">Kaggle</a>
-                <a href="https://huggingface.co" target="_blank" rel="noopener noreferrer">Hugging Face</a>
-                <a href="https://about.me" target="_blank" rel="noopener noreferrer">About.me</a>
-              </div>
+               </div>
             </div>
           </div>
           
