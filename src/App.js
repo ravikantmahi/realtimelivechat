@@ -267,7 +267,7 @@ function App() {
               </p>
             </div>
             <div className="social-links">
-              <a href="mailto:contact@yourdomain.com" className="email-link">✉️ Establish Contact</a>
+              <a href="mailto:ravikantmahi011@gmail.com" className="email-link">✉️ Establish Contact</a>
               <div className="social-badges">
                 <a href="https://www.linkedin.com/in/ravikantmahi/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
                 <a href="https://github.com/Ravikantmahi" target="_blank" rel="noopener noreferrer">GitHub</a>
