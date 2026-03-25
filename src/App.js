@@ -261,7 +261,7 @@ function App() {
                 System Architect: <strong className="gradient-text">Ravi Kant</strong>
               </p>
               <p className="footer-skills">
-                MCA Graduate | Web Developer | Graphics Designer
+                  Web Developer | Graphics Designer
                 <br/>
                 Python (Core) | AI/ML | Big Data & Data Science
               </p>
