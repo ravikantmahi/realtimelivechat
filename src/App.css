@@ -5,27 +5,25 @@
   font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
+/* Prevents the whole page from bouncing or scrolling */
 body {
   background: linear-gradient(135deg, #e0c3fc 0%, #8ec5fc 100%);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  /* Use dvh to account for mobile browser UI shrinking/expanding */
-  min-height: 100dvh; 
-  overflow: hidden;
+  overflow: hidden; 
 }
 
+/* --- MACRO LAYOUT (The Responsive Flexbox Fix) --- */
 .App {
-  width: 100vw;
-  height: 100dvh;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  height: 100dvh; /* Dynamic Viewport Height */
+  width: 100vw;
+  overflow: hidden;
 }
 
 /* --- LOGIN SCREEN --- */
 .join-chat-container {
+  /* margin: auto perfectly centers this div in the remaining flex space */
+  margin: auto; 
   display: flex;
   gap: 40px;
   align-items: center;
@@ -41,23 +39,9 @@ body {
   max-width: 850px;
 }
 
-.hero-text {
-  flex: 1.2;
-  color: #333;
-}
-
-.hero-text h2 {
-  /* Fluid typography: scales based on screen size */
-  font-size: clamp(1.5rem, 4vw, 2.5rem); 
-  margin-bottom: 15px;
-  color: #1a1a1a;
-  line-height: 1.2;
-}
-
-.hero-text p {
-  font-size: clamp(0.9rem, 2vw, 1.1rem);
-  line-height: 1.6;
-}
+.hero-text { flex: 1.2; color: #333; }
+.hero-text h2 { font-size: clamp(1.5rem, 4vw, 2.5rem); margin-bottom: 15px; color: #1a1a1a; line-height: 1.2; }
+.hero-text p { font-size: clamp(0.9rem, 2vw, 1.1rem); line-height: 1.6; }
 
 .join-box {
   flex: 1;
@@ -69,52 +53,29 @@ body {
   box-shadow: 0 10px 25px rgba(0,0,0,0.1);
   width: 100%;
 }
-
 .join-box h3 { margin-bottom: 20px; color: #333; }
-
-.join-box input {
-  height: 50px;
-  margin-bottom: 20px;
-  border: 2px solid #e4e6eb;
-  border-radius: 10px;
-  padding: 0 15px;
-  font-size: 1rem;
-  outline: none;
-  transition: all 0.3s ease;
-  width: 100%;
-}
-
+.join-box input { height: 50px; margin-bottom: 20px; border: 2px solid #e4e6eb; border-radius: 10px; padding: 0 15px; font-size: 1rem; outline: none; transition: all 0.3s ease; width: 100%; }
 .join-box input:focus { border-color: #6a11cb; box-shadow: 0 0 8px rgba(106, 17, 203, 0.2); }
-
-.join-box button {
-  height: 50px;
-  border: none;
-  border-radius: 10px;
-  background: linear-gradient(to right, #6a11cb 0%, #2575fc 100%);
-  color: white;
-  font-size: 1.1rem;
-  font-weight: bold;
-  cursor: pointer;
-  transition: transform 0.2s, box-shadow 0.2s;
-  width: 100%;
-}
-
+.join-box button { height: 50px; border: none; border-radius: 10px; background: linear-gradient(to right, #6a11cb 0%, #2575fc 100%); color: white; font-size: 1.1rem; font-weight: bold; cursor: pointer; transition: transform 0.2s, box-shadow 0.2s; width: 100%; }
 .join-box button:hover { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(37, 117, 252, 0.4); }
 
 /* --- MAIN INTERFACE (CHAT + SIDEBAR) --- */
 .app-container {
+  flex: 1; /* Automatically takes all space between top of screen and footer */
   width: 100%;
   max-width: 1200px;
-  /* Dynamically size based on viewport minus footer space */
-  height: calc(100dvh - 120px); 
+  margin: 0 auto;
   padding: 20px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden; /* Keeps glass panel contained */
   animation: slideUp 0.5s ease-out forwards;
 }
 
 .glass-panel {
+  flex: 1; /* Fills the app-container entirely */
   display: flex;
   width: 100%;
-  height: 100%;
   background: rgba(255, 255, 255, 0.4);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
@@ -124,7 +85,7 @@ body {
   overflow: hidden;
 }
 
-/* --- SIDEBAR --- */
+/* --- SIDEBAR (Desktop) --- */
 .sidebar {
   width: 320px;
   background: rgba(255, 255, 255, 0.6);
@@ -136,41 +97,20 @@ body {
   overflow-y: auto;
 }
 
-.about-section h3, .users-section h3 {
-  font-size: 1.2rem;
-  color: #2c3e50;
-  margin-bottom: 15px;
-  padding-bottom: 10px;
-  border-bottom: 2px solid rgba(0,0,0,0.1);
-}
-
+.about-section h3, .users-section h3 { font-size: 1.2rem; color: #2c3e50; margin-bottom: 15px; padding-bottom: 10px; border-bottom: 2px solid rgba(0,0,0,0.1); }
 .about-section p { font-size: 0.9rem; color: #444; line-height: 1.5; margin-bottom: 15px; }
 .feature-list { list-style: none; font-size: 0.9rem; color: #555; }
 .feature-list li { margin-bottom: 10px; display: flex; align-items: center; gap: 8px; }
 
 .user-list { list-style: none; }
-.user-list li {
-  padding: 10px 15px;
-  background: white;
-  margin-bottom: 8px;
-  border-radius: 8px;
-  font-size: 0.95rem;
-  color: #333;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-  animation: popIn 0.3s ease;
-}
-
+.user-list li { padding: 10px 15px; background: white; margin-bottom: 8px; border-radius: 8px; font-size: 0.95rem; color: #333; box-shadow: 0 2px 5px rgba(0,0,0,0.05); animation: popIn 0.3s ease; }
 .user-list li.highlight-me { border-left: 4px solid #2575fc; font-weight: bold; }
-.interactive-user { cursor: pointer; transition: all 0.2s ease; }
-.interactive-user:hover {
-  background-color: #f0f7ff !important;
-  transform: translateX(5px);
-  border-left: 3px solid #2575fc;
-}
 
+.interactive-user { cursor: pointer; transition: all 0.2s ease; }
+.interactive-user:hover { background-color: #f0f7ff !important; transform: translateX(5px); border-left: 3px solid #2575fc; }
 .sidebar-hint { font-size: 0.75rem; color: #888; font-style: italic; margin-top: 5px; text-align: center; }
 
-/* --- CHAT WINDOW --- */
+/* --- CHAT WINDOW (Desktop) --- */
 .chat-window {
   flex: 1;
   display: flex;
@@ -179,39 +119,19 @@ body {
   height: 100%;
 }
 
-.chat-header {
-  background: linear-gradient(to right, #6a11cb 0%, #2575fc 100%);
-  color: white;
-  padding: 15px 20px;
-  text-align: center;
-  font-weight: bold;
-  font-size: 1.2rem;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-  z-index: 10;
-}
-
-.chat-body {
-  flex-grow: 1;
-  padding: 20px;
-  overflow-y: auto;
-  background-color: #fafbfc;
-  display: flex;
-  flex-direction: column;
-}
-
+.chat-header { background: linear-gradient(to right, #6a11cb 0%, #2575fc 100%); color: white; padding: 15px 20px; text-align: center; font-weight: bold; font-size: 1.2rem; box-shadow: 0 4px 10px rgba(0,0,0,0.1); z-index: 10; }
+.chat-body { flex: 1; padding: 20px; overflow-y: auto; background-color: #fafbfc; display: flex; flex-direction: column; }
 .chat-body::-webkit-scrollbar { width: 6px; }
 .chat-body::-webkit-scrollbar-thumb { background: #ccc; border-radius: 10px; }
 
 /* Messages */
 .system-message { display: flex; justify-content: center; margin: 15px 0; width: 100%; animation: popIn 0.4s ease-out; }
 .system-message span { background-color: rgba(0, 0, 0, 0.05); color: #666; font-size: 0.8rem; padding: 6px 15px; border-radius: 20px; font-style: italic; }
-
 .message-container { display: flex; flex-direction: column; margin-bottom: 15px; max-width: 85%; opacity: 0; animation: slideInUp 0.4s ease-out forwards; }
 #you { align-self: flex-end; align-items: flex-end; }
 #you .message-content { background: linear-gradient(135deg, #2575fc 0%, #0084ff 100%); color: white; border-radius: 20px 20px 4px 20px; box-shadow: 0 4px 10px rgba(37, 117, 252, 0.2); }
 #other { align-self: flex-start; align-items: flex-start; }
 #other .message-content { background-color: #f1f3f5; color: #333; border-radius: 20px 20px 20px 4px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
-
 .message-content { padding: 12px 18px; font-size: 0.95rem; word-wrap: break-word; }
 .message-meta { display: flex; gap: 10px; font-size: 0.75rem; color: #888; margin-top: 5px; padding: 0 5px; }
 #author { font-weight: 600; color: #555; }
@@ -225,71 +145,21 @@ body {
 .typing-dots span:nth-child(2) { animation-delay: -0.16s; }
 
 /* --- CHAT FOOTER & EMOJI BAR --- */
-.chat-footer-wrapper {
-  display: flex;
-  flex-direction: column;
-  background: white;
-  border-top: 1px solid #eee;
-}
-
-.emoji-bar {
-  display: flex;
-  gap: 15px;
-  padding: 8px 15px;
-  background: #fcfcfc;
-  border-bottom: 1px solid #f0f0f0;
-  overflow-x: auto; /* Allows scrolling on small screens */
-  white-space: nowrap;
-}
-.emoji-bar::-webkit-scrollbar { display: none; } /* Hide scrollbar for aesthetics */
-
+.chat-footer-wrapper { display: flex; flex-direction: column; background: white; border-top: 1px solid #eee; }
+.emoji-bar { display: flex; gap: 15px; padding: 8px 15px; background: #fcfcfc; border-bottom: 1px solid #f0f0f0; overflow-x: auto; white-space: nowrap; }
+.emoji-bar::-webkit-scrollbar { display: none; }
 .emoji-btn { cursor: pointer; font-size: 1.2rem; transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
 .emoji-btn:hover { transform: scale(1.4); }
 
-.chat-footer {
-  display: flex;
-  padding: 10px 15px;
-  background: white;
-  align-items: center;
-}
-
-.chat-footer input {
-  flex-grow: 1;
-  border: 1px solid #ddd;
-  background: #f8f9fa;
-  padding: 12px 15px;
-  border-radius: 25px;
-  outline: none;
-  font-size: 1rem;
-  transition: all 0.3s;
-}
-
+.chat-footer { display: flex; padding: 10px 15px; background: white; align-items: center; }
+.chat-footer input { flex: 1; border: 1px solid #ddd; background: #f8f9fa; padding: 12px 15px; border-radius: 25px; outline: none; font-size: 1rem; transition: all 0.3s; }
 .chat-footer input:focus { border-color: #2575fc; background: white; box-shadow: 0 0 10px rgba(37, 117, 252, 0.1); }
-
-.chat-footer button {
-  background: linear-gradient(to right, #6a11cb 0%, #2575fc 100%);
-  border: none;
-  color: white;
-  width: 45px;
-  height: 45px;
-  border-radius: 50%;
-  font-size: 1.2rem;
-  margin-left: 10px;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-  transition: transform 0.2s, box-shadow 0.2s;
-  box-shadow: 0 4px 15px rgba(37, 117, 252, 0.3);
-}
-
+.chat-footer button { background: linear-gradient(to right, #6a11cb 0%, #2575fc 100%); border: none; color: white; width: 45px; height: 45px; border-radius: 50%; font-size: 1.2rem; margin-left: 10px; cursor: pointer; display: flex; align-items: center; justify-content: center; flex-shrink: 0; transition: transform 0.2s, box-shadow 0.2s; box-shadow: 0 4px 15px rgba(37, 117, 252, 0.3); }
 .chat-footer button:hover { transform: scale(1.1); }
 
 /* --- PORTFOLIO FOOTER --- */
 .modern-footer {
-  position: absolute;
-  bottom: 0;
+  flex-shrink: 0; /* Prevents footer from getting crushed on desktop */
   width: 100%;
   background: rgba(255, 255, 255, 0.9);
   backdrop-filter: blur(10px);
@@ -297,17 +167,10 @@ body {
   padding: 15px 0;
   border-top: 1px solid rgba(255, 255, 255, 0.5);
   box-shadow: 0 -4px 20px rgba(0,0,0,0.05);
+  z-index: 50;
 }
 
-.footer-content {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 20px;
-}
-
+.footer-content { display: flex; justify-content: space-between; align-items: center; max-width: 1200px; margin: 0 auto; padding: 0 20px; }
 .footer-info { display: flex; flex-direction: column; gap: 5px; }
 .footer-credits { font-size: 0.95rem; color: #333; }
 .footer-credits strong { color: #2575fc; }
@@ -315,25 +178,8 @@ body {
 .footer-email a { font-size: 0.8rem; color: #2575fc; text-decoration: none; font-weight: 600; }
 .footer-email a:hover { text-decoration: underline; }
 
-.social-links { 
-  display: flex; 
-  gap: 8px; 
-  flex-wrap: wrap;
-  justify-content: flex-end;
-  max-width: 400px;
-}
-
-.social-links a {
-  text-decoration: none;
-  color: white;
-  background: #2c3e50;
-  padding: 5px 10px;
-  border-radius: 15px;
-  font-size: 0.7rem;
-  font-weight: 600;
-  transition: all 0.3s ease;
-}
-
+.social-links { display: flex; gap: 8px; flex-wrap: wrap; justify-content: flex-end; max-width: 450px; }
+.social-links a { text-decoration: none; color: white; background: #2c3e50; padding: 5px 10px; border-radius: 15px; font-size: 0.7rem; font-weight: 600; transition: all 0.3s ease; }
 .social-links a:hover { background: #2575fc; transform: translateY(-2px); }
 
 /* --- ANIMATIONS --- */
@@ -347,32 +193,32 @@ body {
 /* ========================================= */
 
 @media (max-width: 900px) {
-  .app-container { height: calc(100dvh - 160px); }
   .footer-content { flex-direction: column; gap: 15px; text-align: center; }
   .social-links { justify-content: center; }
 }
 
 @media (max-width: 768px) {
-  .join-chat-container { flex-direction: column; text-align: center; padding: 25px; }
+  /* Join Screen fixes */
+  .join-chat-container { flex-direction: column; text-align: center; padding: 30px 20px; }
   
+  /* Chat window fixes */
+  .app-container { padding: 10px; }
   .glass-panel { flex-direction: column; }
   
-  /* Sidebar turns into a top horizontal scrollbar on mobile */
+  /* Transform Sidebar into horizontal top bar */
   .sidebar { 
     width: 100%; 
+    padding: 10px 15px; 
     border-right: none; 
     border-bottom: 1px solid rgba(0,0,0,0.1); 
-    padding: 10px 15px; 
-    gap: 10px;
-    /* Prevent sidebar from taking too much vertical space */
-    flex-shrink: 0; 
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
   }
 
-  /* Hide the heavy text on mobile to prioritize the chat */
-  .about-section { display: none; }
-  
-  .users-section h3 { margin-bottom: 5px; font-size: 1rem; border: none; padding-bottom: 0; }
-  .sidebar-hint { display: none; } /* Hide hint to save space */
+  .about-section { display: none; } /* Hide bulky text */
+  .users-section h3 { font-size: 0.9rem; margin-bottom: 5px; border: none; padding: 0; }
+  .sidebar-hint { display: none; }
   
   .user-list { 
     display: flex; 
@@ -382,29 +228,11 @@ body {
     padding-bottom: 5px;
   }
   .user-list::-webkit-scrollbar { display: none; }
-  
   .user-list li { white-space: nowrap; margin-bottom: 0; font-size: 0.85rem; padding: 6px 12px; }
 
-  /* Adjust Container & Footer for Mobile Keyboards */
-  .app-container {
-    padding: 10px;
-    height: 100dvh;
-    margin: 0;
-    max-height: 100dvh;
-  }
-
-  .modern-footer {
-    display: none; /* Hide footer entirely on chat screen to save space for keyboard */
-  }
-
-  /* Show footer ONLY on the join screen on mobile */
-  body:has(.join-chat-container) .modern-footer {
-    display: block;
-    position: relative;
-    background: transparent;
-    box-shadow: none;
-    border: none;
-  }
+  /* CRITICAL: Hide footer ONLY when chat is active to maximize mobile keyboard space.
+     Using the sibling selector (~) means if app-container is rendered, footer is hidden. */
+  .app-container ~ .modern-footer { display: none; }
   
   .message-container { max-width: 90%; }
 }
