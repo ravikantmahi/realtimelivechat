@@ -264,7 +264,6 @@ function App() {
               <p className="footer-skills">
                   Web Developer | Graphics Designer
                 <br/>
-                Python (Core) | AI/ML | Big Data & Data Science
               </p>
             </div>
             <div className="social-links">
